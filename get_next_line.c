@@ -1,17 +1,28 @@
-#include "get_next_line.h"
-#include "./libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/09 02:26:47 by nle-bret          #+#    #+#             */
+/*   Updated: 2015/12/09 03:55:06 by nle-bret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char	*ft_strcpy_limit(char *str)
+#include "get_next_line.h"
+
+char	*ft_strcpy_limit(char *str, char n)
 {
 	int		i;
-	char	*dst;	
+	char	*dst;
 
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str[i] != n)
 		i++;
 	dst = (char *)malloc(i + 1);
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str[i] != n)
 	{
 		dst[i] = str[i];
 		i++;
@@ -34,33 +45,26 @@ t_save	*ft_create_fd(int fd_pnum)
 int		ft_save(t_save **s, char *buf, char **line)
 {
 	char	*eol;
-	
-	//printf("\n____LIST %p\n", *s);
-	//printf("REST [%s]\n", (*s)->rest);
+
 	if ((eol = ft_strchr(buf, '\n')) != NULL)
 	{
-		//printf("EOL\n");
 		ft_strdel(line);
 		if (*eol == '\n')
 			eol++;
 		if ((*s)->rest && ft_strchr((*s)->rest, '\n') == NULL)
-			*line = ft_strjoin((*s)->rest, ft_strcpy_limit(buf));
+			*line = ft_strjoin((*s)->rest, ft_strcpy_limit(buf, '\n'));
 		else
-			*line = ft_strcpy_limit(buf);
-		//printf("_REST_ [%s]\n", (*s)->rest);
-		//ft_strdel(&(*s)->rest);
+			*line = ft_strcpy_limit(buf, '\n');
 		(*s)->rest = ft_strdup(eol);
-		//printf("REST [%s]\n", (*s)->rest);
 		return (1);
 	}
 	else
 	{
-		//printf("PAS DE EOL\n");
 		if ((*s)->rest)
 			(*s)->rest = ft_strjoin((*s)->rest, buf);
 		else
 			(*s)->rest = ft_strdup(buf);
-	}	
+	}
 	return (0);
 }
 
@@ -81,10 +85,10 @@ t_save	*ft_get_list(t_save **s, int fd)
 	return (lst);
 }
 
-int     get_next_line(int const fd, char **line)
+int		get_next_line(int const fd, char **line)
 {
-	char            buf[BUFF_SIZE + 1];
-	int             ret;
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
 	static t_save	*s;
 	t_save			*lst;
 
@@ -92,8 +96,8 @@ int     get_next_line(int const fd, char **line)
 		return (-1);
 	*line = NULL;
 	lst = ft_get_list(&s, fd);
-	if (lst && lst->rest && ft_strchr(lst->rest, '\n') && 
-		ft_save(&lst, lst->rest, line))
+	if (lst && lst->rest && ft_strchr(lst->rest, '\n') &&
+			ft_save(&lst, lst->rest, line))
 		return (1);
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{

@@ -66,8 +66,11 @@ SRC = ft_memset.c\
 	  ft_lstsize.c\
 	  ft_lsttotab.c\
 	  ft_tablen.c\
-	  ft_tabjoin.c
+	  ft_tabjoin.c\
+
 OBJ = $(SRC:.c=.o)
+
+INC = ./includes
 
 CC = gcc -Wall -Werror -Wextra
 
@@ -78,7 +81,7 @@ $(NAME) : $(OBJ)
 	ranlib $(NAME)
 
 %.o: %.c
-	$(CC) -c $^
+	$(CC) -I$(INC) -c $^
 
 clean :
 	rm -f $(OBJ)
