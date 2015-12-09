@@ -6,7 +6,7 @@
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 03:54:11 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/12/09 06:01:46 by nle-bret         ###   ########.fr       */
+/*   Updated: 2015/12/09 06:07:48 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include "libft.h"
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 9999
 
 typedef struct		s_save
 {
