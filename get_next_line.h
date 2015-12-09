@@ -6,20 +6,19 @@
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 03:54:11 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/12/09 03:55:26 by nle-bret         ###   ########.fr       */
+/*   Updated: 2015/12/09 04:45:06 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include "libft.h"
 
-# define BUFF_SIZE 1000
+# define BUFF_SIZE 1
 
 typedef struct		s_save
 {

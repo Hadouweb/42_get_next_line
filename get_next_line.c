@@ -6,7 +6,7 @@
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 02:26:47 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/12/09 03:55:06 by nle-bret         ###   ########.fr       */
+/*   Updated: 2015/12/09 04:45:04 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_save	*ft_create_fd(int fd_pnum)
 int		ft_save(t_save **s, char *buf, char **line)
 {
 	char	*eol;
+	char	*tmp;
 
 	if ((eol = ft_strchr(buf, '\n')) != NULL)
 	{
@@ -55,7 +56,9 @@ int		ft_save(t_save **s, char *buf, char **line)
 			*line = ft_strjoin((*s)->rest, ft_strcpy_limit(buf, '\n'));
 		else
 			*line = ft_strcpy_limit(buf, '\n');
+		tmp = (*s)->rest;
 		(*s)->rest = ft_strdup(eol);
+		free(tmp);
 		return (1);
 	}
 	else
