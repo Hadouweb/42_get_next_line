@@ -47,26 +47,26 @@ int		ft_save(t_save **s, char *buf, char **line)
 	char	*eol;
 	char	*tmp;
 
-	if ((eol = ft_strchr(buf, '\n')) != NULL)
+	if ((eol = ft_strchr(buf, '\n')) != NULL && eol++)
 	{
 		ft_strdel(line);
-		if (*eol == '\n')
-			eol++;
 		if ((*s)->rest && ft_strchr((*s)->rest, '\n') == NULL)
 			*line = ft_strjoin((*s)->rest, ft_strcpy_limit(buf, '\n'));
 		else
 			*line = ft_strcpy_limit(buf, '\n');
 		tmp = (*s)->rest;
 		(*s)->rest = ft_strdup(eol);
-		free(tmp);
+		ft_strdel(&tmp);
 		return (1);
 	}
 	else
 	{
+		tmp = (*s)->rest;
 		if ((*s)->rest)
 			(*s)->rest = ft_strjoin((*s)->rest, buf);
 		else
 			(*s)->rest = ft_strdup(buf);
+		ft_strdel(&tmp);
 	}
 	return (0);
 }
