@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcpy_limit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 03:54:11 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/12/09 06:07:48 by nle-bret         ###   ########.fr       */
+/*   Created: 2016/03/13 04:22:10 by nle-bret          #+#    #+#             */
+/*   Updated: 2016/03/13 04:22:12 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
-
-# define BUFF_SIZE 10
-
-typedef struct		s_save
+char		*ft_strcpy_limit(char *str, char n)
 {
-	int				fd_num;
-	char			*rest;
-	struct s_save	*next;
-}					t_save;
+	int		i;
+	char	*dst;
 
-int					get_next_line(int const fd, char **line);
-
-#endif
+	i = 0;
+	while (str[i] && str[i] != n)
+		i++;
+	dst = (char *)ft_memalloc(i + 1);
+	i = 0;
+	while (str[i] && str[i] != n)
+	{
+		dst[i] = str[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}

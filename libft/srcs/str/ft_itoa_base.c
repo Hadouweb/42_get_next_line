@@ -1,51 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 17:24:55 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/11/24 17:25:38 by nle-bret         ###   ########.fr       */
+/*   Created: 2015/11/25 00:36:11 by nle-bret          #+#    #+#             */
+/*   Updated: 2015/11/25 03:15:59 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_intlen(int n)
+static int	ft_intlen(int value, int base)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
-	if (n < 0)
+	if (value < 0 && base == 10)
 		i++;
-	while (n != 0)
+	if (value == 0)
+		i++;
+	while (value)
 	{
-		n /= 10;
+		value /= base;
 		i++;
 	}
 	return (i);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa_base(int value, int base)
 {
 	char	*str;
-	size_t	i;
+	int		size;
 	int		sign;
 
-	i = ft_intlen(n);
-	sign = (n < 0) ? -1 : 1;
-	if (n == 0)
-		return ("0");
-	if ((str = (char *)malloc(i * sizeof(char) + 1)) == NULL)
-		return (NULL);
-	if (n < 0)
+	size = ft_intlen(value, base);
+	str = (char *)malloc(size * sizeof(char) + 1);
+	sign = (value < 0) ? -1 : 1;
+	str[size--] = '\0';
+	if (value < 0 && base == 10)
 		str[0] = '-';
-	while (n != 0)
+	if (value == 0)
+		str[0] = '0';
+	while (value)
 	{
-		str[i - 1] = (n % 10 * sign) + '0';
-		n /= 10;
-		i--;
+		str[size] = value % base * sign;
+		if (str[size] >= 10)
+			str[size] += 7;
+		str[size] += '0';
+		value /= base;
+		size--;
 	}
 	return (str);
 }

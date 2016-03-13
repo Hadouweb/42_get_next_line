@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 03:54:11 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/12/09 06:07:48 by nle-bret         ###   ########.fr       */
+/*   Created: 2016/03/04 20:47:44 by nle-bret          #+#    #+#             */
+/*   Updated: 2016/03/04 20:47:46 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
-
-# define BUFF_SIZE 10
-
-typedef struct		s_save
+char	*ft_strndup(char *str, int len)
 {
-	int				fd_num;
-	char			*rest;
-	struct s_save	*next;
-}					t_save;
+	char	*rep;
 
-int					get_next_line(int const fd, char **line);
-
-#endif
+	if ((rep = (char*)ft_memalloc(len + 1)) == NULL)
+		return (NULL);
+	ft_strncpy(rep, str, len);
+	rep[len] = '\0';
+	return (rep);
+}

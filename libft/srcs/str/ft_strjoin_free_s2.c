@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strjoin_free_s2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 03:54:11 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/12/09 06:07:48 by nle-bret         ###   ########.fr       */
+/*   Created: 2016/03/13 04:22:21 by nle-bret          #+#    #+#             */
+/*   Updated: 2016/03/13 04:22:23 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
-
-# define BUFF_SIZE 10
-
-typedef struct		s_save
+char	*ft_strjoin_free_s2(char *s1, char *s2)
 {
-	int				fd_num;
-	char			*rest;
-	struct s_save	*next;
-}					t_save;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-int					get_next_line(int const fd, char **line);
-
-#endif
+	i = 0;
+	j = 0;
+	str = ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	ft_strdel(&s2);
+	return (str);
+}

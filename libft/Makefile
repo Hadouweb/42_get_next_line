@@ -1,92 +1,109 @@
+.PHONY: all clean fclean re
+
+SRCPATH = ./srcs
+BITPATH = $(SRCPATH)/bit
+ISPATH = $(SRCPATH)/is
+LISTPATH = $(SRCPATH)/list
+MEMPATH = $(SRCPATH)/mem
+PRINTPATH = $(SRCPATH)/print
+STRPATH = $(SRCPATH)/str
+TABPATH = $(SRCPATH)/tab
+
 NAME = libft.a
-SRC = ft_memset.c\
-	  ft_bzero.c\
-	  ft_memcpy.c\
-	  ft_memccpy.c\
-	  ft_memmove.c\
-	  ft_memchr.c\
-	  ft_memcmp.c\
-	  ft_strlen.c\
-	  ft_strdup.c\
-	  ft_strcpy.c\
-	  ft_strncpy.c\
-	  ft_strcat.c\
-	  ft_strncat.c\
-	  ft_strlcat.c\
-	  ft_strchr.c\
-	  ft_strrchr.c\
-	  ft_strstr.c\
-	  ft_strnstr.c\
-	  ft_strcmp.c\
-	  ft_strncmp.c\
-	  ft_atoi.c\
-	  ft_isalpha.c\
-	  ft_isdigit.c\
-	  ft_isalnum.c\
-	  ft_isascii.c\
-	  ft_isprint.c\
-	  ft_toupper.c\
-	  ft_tolower.c\
-	  ft_memalloc.c\
-	  ft_memdel.c\
-	  ft_strnew.c\
-	  ft_strdel.c\
-	  ft_strclr.c\
-	  ft_striter.c\
-	  ft_striteri.c\
-	  ft_strmap.c\
-	  ft_strmapi.c\
-	  ft_strequ.c\
-	  ft_strnequ.c\
-	  ft_strsub.c\
-	  ft_strjoin.c\
-	  ft_strtrim.c\
-	  ft_strsplit.c\
-	  ft_itoa.c\
-	  ft_putchar.c\
-	  ft_putstr.c\
-	  ft_putendl.c\
-	  ft_putnbr.c\
-	  ft_putchar_fd.c\
-	  ft_putstr_fd.c\
-	  ft_putendl_fd.c\
-	  ft_putnbr_fd.c\
-	  ft_lstnew.c\
-	  ft_lstdelone.c\
-	  ft_lstdel.c\
-	  ft_lstadd.c\
-	  ft_lstiter.c\
-	  ft_lstmap.c\
-	  ft_printbit.c\
-	  ft_reversebit.c\
-	  ft_itoa_base.c\
-	  ft_putnbr_base.c\
-	  ft_lstpush_front.c\
-	  ft_lstpush_back.c\
-	  ft_lstsize.c\
-	  ft_lsttotab.c\
-	  ft_tablen.c\
-	  ft_tabjoin.c\
+
+SRC = 	$(BITPATH)/ft_printbit.c\
+		$(BITPATH)/ft_reversebit.c\
+		$(ISPATH)/ft_isalnum.c\
+		$(ISPATH)/ft_isalpha.c\
+		$(ISPATH)/ft_isascii.c\
+		$(ISPATH)/ft_isdigit.c\
+		$(ISPATH)/ft_isprint.c\
+		$(LISTPATH)/ft_lstadd.c\
+		$(LISTPATH)/ft_lstdel.c\
+		$(LISTPATH)/ft_lstdelone.c\
+		$(LISTPATH)/ft_lstiter.c\
+		$(LISTPATH)/ft_lstmap.c\
+		$(LISTPATH)/ft_lstnew.c\
+		$(LISTPATH)/ft_lstpush_back.c\
+		$(LISTPATH)/ft_lstpush_front.c\
+		$(LISTPATH)/ft_lstsize.c\
+		$(LISTPATH)/ft_lstsplit.c\
+		$(LISTPATH)/ft_lsttotab.c\
+		$(MEMPATH)/ft_bzero.c\
+		$(MEMPATH)/ft_memalloc.c\
+		$(MEMPATH)/ft_memccpy.c\
+		$(MEMPATH)/ft_memchr.c\
+		$(MEMPATH)/ft_memcmp.c\
+		$(MEMPATH)/ft_memcpy.c\
+		$(MEMPATH)/ft_memdel.c\
+		$(MEMPATH)/ft_memmove.c\
+		$(MEMPATH)/ft_memset.c\
+		$(PRINTPATH)/ft_putchar.c\
+		$(PRINTPATH)/ft_putchar_fd.c\
+		$(PRINTPATH)/ft_putendl.c\
+		$(PRINTPATH)/ft_putendl_fd.c\
+		$(PRINTPATH)/ft_putnbr.c\
+		$(PRINTPATH)/ft_putnbr_base.c\
+		$(PRINTPATH)/ft_putnbr_fd.c\
+		$(PRINTPATH)/ft_putstr.c\
+		$(PRINTPATH)/ft_putstr_fd.c\
+		$(STRPATH)/ft_atoi.c\
+		$(STRPATH)/ft_itoa.c\
+		$(STRPATH)/ft_itoa_base.c\
+		$(STRPATH)/ft_strcat.c\
+		$(STRPATH)/ft_strchr.c\
+		$(STRPATH)/ft_strclr.c\
+		$(STRPATH)/ft_strcmp.c\
+		$(STRPATH)/ft_strcpy.c\
+		$(STRPATH)/ft_strcpy_limit.c\
+		$(STRPATH)/ft_strdel.c\
+		$(STRPATH)/ft_strdup.c\
+		$(STRPATH)/ft_strequ.c\
+		$(STRPATH)/ft_striter.c\
+		$(STRPATH)/ft_striteri.c\
+		$(STRPATH)/ft_strjoin.c\
+		$(STRPATH)/ft_strjoin_free_s2.c\
+		$(STRPATH)/ft_strlcat.c\
+		$(STRPATH)/ft_strcat.c\
+		$(STRPATH)/ft_strlen.c\
+		$(STRPATH)/ft_strmap.c\
+		$(STRPATH)/ft_strmapi.c\
+		$(STRPATH)/ft_strncat.c\
+		$(STRPATH)/ft_strncmp.c\
+		$(STRPATH)/ft_strncpy.c\
+		$(STRPATH)/ft_strnequ.c\
+		$(STRPATH)/ft_strnew.c\
+		$(STRPATH)/ft_strnstr.c\
+		$(STRPATH)/ft_strrchr.c\
+		$(STRPATH)/ft_strsplit.c\
+		$(STRPATH)/ft_strstr.c\
+		$(STRPATH)/ft_strsub.c\
+		$(STRPATH)/ft_strtrim.c\
+		$(STRPATH)/ft_tolower.c\
+		$(STRPATH)/ft_toupper.c\
+		$(TABPATH)/ft_tabjoin.c\
+		$(TABPATH)/ft_tablen.c\
 
 OBJ = $(SRC:.c=.o)
 
-INC = ./includes
+INC = -I./includes
 
 CC = gcc -Wall -Werror -Wextra
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME) : $(OBJ)
-	ar -rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(NAME): $(OBJ)
+	@ar -rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 %.o: %.c
-	$(CC) -I$(INC) -c $^
+	@$(CC) $(INC) -o $@ -c $<
+	@echo "\033[32m█\033[0m\c"
 
-clean :
-	rm -f $(OBJ)
+clean:
+	@rm -rf $(OBJ)
 
-fclean : clean
-	rm -f $(NAME)
+fclean: clean
+	@rm -rf $(NAME)
 
-re : fclean all
+re: fclean all

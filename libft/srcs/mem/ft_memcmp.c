@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 15:21:53 by nle-bret          #+#    #+#             */
-/*   Updated: 2015/11/24 15:24:17 by nle-bret         ###   ########.fr       */
+/*   Created: 2015/11/24 02:33:03 by nle-bret          #+#    #+#             */
+/*   Updated: 2015/11/24 02:33:28 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*str;
-	size_t	i;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
 	i = 0;
-	if ((str = (char *)malloc(size * sizeof(char) + 1)) == NULL)
-		return (NULL);
-	while (i < size)
-	{
-		str[i] = '\0';
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (str1[i] == str2[i] && i + 1 < n)
 		i++;
-	}
-	return (str);
+	return (str1[i] - str2[i]);
 }

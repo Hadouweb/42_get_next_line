@@ -12,46 +12,26 @@
 
 #include "get_next_line.h"
 
-char	*ft_strcpy_limit(char *str, char n)
-{
-	int		i;
-	char	*dst;
-
-	i = 0;
-	while (str[i] && str[i] != n)
-		i++;
-	dst = (char *)malloc(i + 1);
-	i = 0;
-	while (str[i] && str[i] != n)
-	{
-		dst[i] = str[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
-
-t_save	*ft_create_fd(int fd_pnum)
+static t_save	*ft_create_fd(int fd_pnum)
 {
 	t_save		*fd;
 
-	fd = (t_save *)malloc(sizeof(t_save));
+	fd = (t_save *)ft_memalloc(sizeof(t_save));
 	fd->rest = ft_memalloc(1);
 	fd->fd_num = fd_pnum;
 	fd->next = NULL;
 	return (fd);
 }
 
-int		ft_save(t_save **s, char *buf, char **line)
+static int		ft_save(t_save **s, char *buf, char **line)
 {
 	char	*eol;
 	char	*tmp;
 
 	if ((eol = ft_strchr(buf, '\n')) != NULL && eol++)
 	{
-		ft_strdel(line);
 		if ((*s)->rest && ft_strchr((*s)->rest, '\n') == NULL)
-			*line = ft_strjoin((*s)->rest, ft_strcpy_limit(buf, '\n'));
+			*line = ft_strjoin_free_s2((*s)->rest, ft_strcpy_limit(buf, '\n'));
 		else
 			*line = ft_strcpy_limit(buf, '\n');
 		tmp = (*s)->rest;
@@ -71,7 +51,7 @@ int		ft_save(t_save **s, char *buf, char **line)
 	return (0);
 }
 
-t_save	*ft_get_list(t_save **s, int fd)
+static t_save	*ft_get_list(t_save **s, int fd)
 {
 	t_save			*lst;
 
@@ -88,7 +68,20 @@ t_save	*ft_get_list(t_save **s, int fd)
 	return (lst);
 }
 
-int		get_next_line(int const fd, char **line)
+static int		ft_verif_last_line(t_save *lst, char **line, int ret)
+{
+	if (ret != -1 && lst->rest && (*line = ft_strdup(lst->rest)) != NULL)
+	{
+		if (lst->rest && ft_strlen(lst->rest))
+			ret = 1;
+		else
+			ret = 0;
+		ft_strdel(&lst->rest);
+	}
+	return (ret);
+}
+
+int				get_next_line(int const fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
 	int				ret;
@@ -97,7 +90,6 @@ int		get_next_line(int const fd, char **line)
 
 	if (!line)
 		return (-1);
-	*line = NULL;
 	lst = ft_get_list(&s, fd);
 	if (lst && lst->rest && ft_strchr(lst->rest, '\n') &&
 			ft_save(&lst, lst->rest, line))
@@ -108,9 +100,5 @@ int		get_next_line(int const fd, char **line)
 		if (ft_save(&lst, buf, line))
 			return (1);
 	}
-	if (ret == 0 && lst->rest && (*line = ft_strdup(lst->rest)) != NULL)
-		ft_strdel(&lst->rest);
-	if (ret == -1)
-		return (-1);
-	return (0);
+	return (ft_verif_last_line(lst, line, ret));
 }
