@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free_s2.c                               :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/13 04:22:21 by nle-bret          #+#    #+#             */
-/*   Updated: 2016/03/13 04:22:23 by nle-bret         ###   ########.fr       */
+/*   Created: 2016/03/13 04:51:09 by nle-bret          #+#    #+#             */
+/*   Updated: 2016/03/13 04:51:10 by nle-bret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_free_s2(char *s1, char *s2)
+void	ft_lstprint(t_list *lst, void (*print)(void *))
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
-
-	i = 0;
-	j = 0;
-	if ((str = ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1)) == NULL)
-		return (NULL);
-	while (s1[i])
+	while (lst)
 	{
-		str[i] = s1[i];
-		i++;
+		ft_putstr("\033[033mcontent : \033[0m[");
+		(*print)(lst->content);
+		ft_putstr("]\t\033[035msize : \033[0m[");
+		ft_putnbr(lst->content_size);
+		ft_putstr("]\n");
+		lst = lst->next;
 	}
-	while (s2[j])
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
-	ft_strdel(&s2);
-	return (str);
 }

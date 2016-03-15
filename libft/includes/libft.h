@@ -87,10 +87,10 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-
+void				ft_lstprint(t_list *lst, void (*print)(void *));
 void				ft_lstpush(t_list **alst, t_list *new);
 void				ft_printbit(unsigned char octet);
-unsigned char		ft_reversebit(unsigned char cotet);
+unsigned char		ft_reversebit(unsigned char octet);
 char				*ft_itoa_base(int n, int base);
 void				ft_putnbr_base(int n, int base);
 void				ft_lstpush_front(t_list **lst, void const *c, size_t s);

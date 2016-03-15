@@ -36,7 +36,8 @@ char		*ft_itoa_base(int value, int base)
 	int		sign;
 
 	size = ft_intlen(value, base);
-	str = (char *)malloc(size * sizeof(char) + 1);
+	if ((str = (char *)ft_memalloc(size + 1)) == NULL)
+		return (NULL);
 	sign = (value < 0) ? -1 : 1;
 	str[size--] = '\0';
 	if (value < 0 && base == 10)

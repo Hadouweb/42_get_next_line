@@ -22,13 +22,16 @@ void	**ft_lsttotab(t_list *l)
 	list = l;
 	size = ft_lstsize(l);
 	i = 0;
-	tab = (void **)ft_memalloc(size);
+	if ((tab = (void **)ft_memalloc(size + 1)) == NULL)
+		return (NULL);
 	while (list)
 	{
-		tab[i] = (void *)ft_memalloc(list->content_size);
-		tab[i] = list->content;
+		if ((tab[i] = (void *)ft_memalloc(list->content_size)) == NULL)
+			return (NULL);
+		ft_memcpy(tab[i], list->content, list->content_size);
 		list = list->next;
 		i++;
 	}
+	tab[i] = NULL;
 	return (tab);
 }

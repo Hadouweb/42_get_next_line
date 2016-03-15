@@ -29,7 +29,7 @@ char	*ft_strtrim(char const *s)
 	j--;
 	while (s[j] && (s[j] == ' ' || s[j] == '\t' || s[j] == '\n'))
 		j--;
-	if ((str = (char *)malloc((j - i) * sizeof(char) + 1)) == NULL)
+	if ((str = (char *)ft_memalloc((j - i) + 1)) == NULL)
 		return (NULL);
 	while (s[i] && i <= j)
 		str[k++] = s[i++];

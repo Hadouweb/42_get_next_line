@@ -56,7 +56,7 @@ static char	*ft_subtab(char const *s, char c)
 
 	j = 0;
 	size_word = ft_strlen_split(s, c);
-	if ((str = (char *)malloc(size_word * sizeof(char) + 1)) == NULL)
+	if ((str = (char *)ft_memalloc(size_word + 1)) == NULL)
 		return (NULL);
 	while (j < size_word)
 		str[j++] = *s++;
@@ -74,7 +74,7 @@ char		**ft_strsplit(char const *s, char c)
 	i = 0;
 	k = 0;
 	nb_word = ft_count_word(s, c);
-	if ((str = (char **)malloc(nb_word * sizeof(char *) + 1)) == NULL)
+	if ((str = (char **)ft_memalloc(nb_word * sizeof(char *) + 1)) == NULL)
 		return (NULL);
 	while (i < nb_word)
 	{

@@ -16,8 +16,9 @@ static t_save	*ft_create_fd(int fd_pnum)
 {
 	t_save		*fd;
 
-	fd = (t_save *)ft_memalloc(sizeof(t_save));
-	fd->rest = ft_memalloc(1);
+	if ((fd = (t_save *)ft_memalloc(sizeof(t_save))) == NULL)
+		return (NULL);
+	fd->rest = ft_strnew(1);
 	fd->fd_num = fd_pnum;
 	fd->next = NULL;
 	return (fd);

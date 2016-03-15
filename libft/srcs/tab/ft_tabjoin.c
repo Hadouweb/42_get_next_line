@@ -22,7 +22,7 @@ int		*ft_tabjoin(int *t1, int *t2)
 	i = 0;
 	j = 0;
 	size = ft_tablen(t1) + ft_tablen(t2);
-	if ((tab = (int *)malloc(size * sizeof(int) + 1)) == NULL)
+	if ((tab = (int *)ft_memalloc(size * sizeof(int) + 1)) == NULL)
 		return (NULL);
 	while (t1[i])
 	{
